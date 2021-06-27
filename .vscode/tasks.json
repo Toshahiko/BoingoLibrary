@@ -6,11 +6,11 @@
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-g",
-				"${file}",
+				"${workspaceFolder}/src/*.cpp",
 				"-std=c++2a",
 				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}.out"
+				"${workspaceFolder}/build/${workspaceFolderBasename}.out"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

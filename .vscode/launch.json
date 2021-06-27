@@ -9,7 +9,7 @@
       "name": "clang++ - Build and debug active file",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+      "program": "${workspaceFolder}/build/${workspaceFolderBasename}.out",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",

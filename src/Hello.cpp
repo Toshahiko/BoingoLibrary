@@ -1,6 +1,7 @@
 #include <iostream>
+#include "HelloFunc.h"
 
 int main() {
-  std::cout << "Hello Worl" << std::endl ;
+  Boingo::HelloFunc() ;
   return 0 ;
 }
