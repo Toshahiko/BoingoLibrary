@@ -5,13 +5,12 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "C/C++: clang++ build active file",
+			"label": "C/C++: clang++ build project",
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-g",
 				"${workspaceFolder}/src/*.cpp",
 				"-std=c++2a",
-				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
 				"-I${workspaceFolder}",
 				"-o",
 				"${workspaceFolder}/build/${workspaceFolderBasename}.out"
@@ -31,16 +30,16 @@
 		},
 		{
 			"type": "shell",
-			"label": "C/C++: clang++ build active file",
+			"label": "C/C++: clang++ build test project",
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-g",
-				"${workspaceFolder}/src/*.cpp",
+				"${workspaceFolder}/test/*.cpp",
 				"-std=c++2a",
 				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
-				"-I${workspaceFolder}/include",
+				"-I${workspaceFolder}",
 				"-o",
-				"${workspaceFolder}/build/${workspaceFolderBasename}.out"
+				"${workspaceFolder}/build/${workspaceFolderBasename}Test.out"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
