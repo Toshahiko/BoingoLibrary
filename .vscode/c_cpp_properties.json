@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-          "name": "mac",
+            "name": "mac",
             "includePath": [
                 "/usr/local/Cellar/boost/1.75.0_3",
                 "/Users/tanimotokazuhiko/Projects/doctest/doctest",
