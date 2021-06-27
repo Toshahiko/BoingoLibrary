@@ -1,0 +1,26 @@
+{
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "C/C++: clang++ build active file",
+			"command": "/usr/bin/clang++",
+			"args": [
+				"-g",
+				"${file}",
+				"-std=c++2a",
+				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.out"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": {
+				"base": "$gcc",
+				"fileLocation": ["absolute"],
+			},
+			"group": "build",
+			"detail": "compiler: /usr/bin/clang++"
+		}
+	]
+}
