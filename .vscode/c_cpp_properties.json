@@ -4,12 +4,14 @@
             "name": "mac",
             "includePath": [
                 "/usr/local/Cellar/boost/1.75.0_3",
-                "/Users/tanimotokazuhiko/Projects/doctest/doctest"
+                "/Users/tanimotokazuhiko/Projects/doctest/doctest",
+                "${workspaceFolder}"
             ],
             "macFrameworkPath": [
                 "/System/Library/Frameworks",
                 "/Library/Frameworks"
             ],
+            "forcedInclude": ["${workspaceFolder}/include/pch.h"],
             "compilerPath": "/usr/bin/clang++",
             "cStandard": "gnu17",
             "cppStandard": "gnu++20"

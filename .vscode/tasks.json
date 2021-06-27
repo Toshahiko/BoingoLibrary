@@ -12,6 +12,7 @@
 				"${workspaceFolder}/src/*.cpp",
 				"-std=c++2a",
 				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
+				"-I${workspaceFolder}",
 				"-o",
 				"${workspaceFolder}/build/${workspaceFolderBasename}.out"
 			],
@@ -37,6 +38,7 @@
 				"${workspaceFolder}/src/*.cpp",
 				"-std=c++2a",
 				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
+				"-I${workspaceFolder}/include",
 				"-o",
 				"${workspaceFolder}/build/${workspaceFolderBasename}.out"
 			],
