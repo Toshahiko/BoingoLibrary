@@ -11,10 +11,11 @@
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}.out",
       "args": [],
-      "stopAtEntry": true,
+      "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
       "externalConsole": false,
+      "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "lldb",
       "preLaunchTask": "C/C++: clang++ build active file"
     }
