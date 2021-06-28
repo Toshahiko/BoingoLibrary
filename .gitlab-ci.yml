@@ -1,0 +1,14 @@
+# .gitlab-ci.yml
+stages:
+  - prepare
+  - echo
+
+prepare-job:
+  stage: prepare
+  script: 
+    - echo "Prepare before echo-job..."
+
+echo-job:
+  stage: echo
+  script: 
+    - echo "Ahoy! This is Gitlab CI/CD!"
