@@ -17,7 +17,7 @@
       "externalConsole": false,
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "lldb",
-      "preLaunchTask": "C/C++: clang++ build active file"
+      "preLaunchTask": "C/C++: clang++ build project"
     }
   ]
 }

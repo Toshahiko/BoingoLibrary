@@ -1,7 +1,8 @@
 #pragma once
+#include <string>
 
 namespace Boingo {
 
-void HelloFunc() ;
+std::string HelloFunc() ;
 
 } // namespace Boingo

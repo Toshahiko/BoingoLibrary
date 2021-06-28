@@ -10,6 +10,7 @@
 			"args": [
 				"-g",
 				"${workspaceFolder}/src/*.cpp",
+				"${workspaceFolder}/main/main.cpp",
 				"-std=c++2a",
 				"-I${workspaceFolder}",
 				"-o",
@@ -34,6 +35,7 @@
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-g",
+				"${workspaceFolder}/src/*.cpp",
 				"${workspaceFolder}/test/*.cpp",
 				"-std=c++2a",
 				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",

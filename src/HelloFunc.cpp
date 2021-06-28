@@ -3,8 +3,9 @@
 
 namespace Boingo {
 
-void HelloFunc() {
-  std::cout << "Hello!" << std::endl ;
+std::string HelloFunc() {
+  // std::cout << "Hello!" << std::endl ;
+  return "Hello!";
 }
 
 class B {
