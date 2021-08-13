@@ -40,7 +40,7 @@ class DebugDecorator {
 public :
   DebugDecorator( const Callable& c, const char* s )
   : m_c( c ), m_s( s ) {}
-  
+
   template<typename ... Args>
   auto operator()( Args&& ... args ) const {
     std::cout << "Invoking: " << m_s << std::endl ;
