@@ -4,6 +4,7 @@
             "name": "mac",
             "includePath": [
                 "/usr/local/Cellar/boost/1.75.0_3",
+                "/usr/local/Cellar/matplotplusplus/1.1.0",
                 "/Users/tanimotokazuhiko/Projects/doctest/doctest",
                 "${workspaceFolder}"
             ],

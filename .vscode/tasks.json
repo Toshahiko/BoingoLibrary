@@ -13,6 +13,8 @@
 				"${workspaceFolder}/main/main.cpp",
 				"-std=c++2a",
 				"-I${workspaceFolder}",
+				"-L/usr/local/Cellar/matplotplusplus/1.1.0/lib/",
+				"-lmatplot",
 				"-o",
 				"${workspaceFolder}/build/${workspaceFolderBasename}.out"
 			],
@@ -40,6 +42,8 @@
 				"-std=c++2a",
 				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
 				"-I${workspaceFolder}",
+				"-L/usr/local/Cellar/matplotplusplus/1.1.0/lib/libmatplot.dylib",
+				"-lmatplot",
 				"-o",
 				"${workspaceFolder}/build/${workspaceFolderBasename}Test.out"
 			],
