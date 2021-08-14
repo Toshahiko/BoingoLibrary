@@ -21,9 +21,9 @@ const auto DivergeFuncY( double x, double y ) {
   return x*x + 4*y ;
 }
 
-class Newton2D {
+class GradientDescent {
   public:
-  Newton2D( const auto& diverge_x, const auto& diverge_y, const auto& initial_value, const double step_width )
+  GradientDescent( const auto& diverge_x, const auto& diverge_y, const auto& initial_value, const double step_width )
   : m_diverge_x( diverge_x ), m_diverge_y( diverge_y ), m_initial_value( initial_value ), m_step_width( step_width )
   {}
 
@@ -101,8 +101,8 @@ int main() {
   const auto least_z = matplot::transform( least_x, least_y, func ) ;
   matplot::scatter3( least_x, least_y, least_z ) ;
 
-  Newton2D newton2d( DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ), 0.1 ) ;
-  const auto [solution_x, solution_y] = newton2d.Execute() ;
+  GradientDescent GradientDescent( DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ), 0.1 ) ;
+  const auto [solution_x, solution_y] = GradientDescent.Execute() ;
   const auto solution_z = matplot::transform( solution_x, solution_y, func ) ;
   matplot::scatter3( solution_x, solution_y, solution_z ) ;
 
