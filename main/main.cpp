@@ -35,13 +35,24 @@ class Newton2D {
     matplot::vector_1d y_plot ;
     x_plot.push_back( tmp_xy.first ) ;
     y_plot.push_back( tmp_xy.second ) ;
+    constexpr double tolerance = 1.0e-5 ;
+    const auto norm = []( const auto diverge_x, const auto diverge_y ) {
+      return diverge_x*diverge_x + diverge_y*diverge_y ;
+    } ;
+
+    int count = 0 ;
     for ( int i = 0 ; i < 100 ; ++i ) {
-      tmp_xy.first = tmp_xy.first - m_delta*m_diverge_x( tmp_xy.first, tmp_xy.second ) ;
-      tmp_xy.second = tmp_xy.second - m_delta*m_diverge_y( tmp_xy.first, tmp_xy.second ) ;
+      const auto diverge_x = m_diverge_x( tmp_xy.first, tmp_xy.second ) ;
+      const auto diverge_y = m_diverge_y( tmp_xy.first, tmp_xy.second ) ;
+      if ( norm( diverge_x, diverge_y ) < tolerance ) break ;
+      tmp_xy.first = tmp_xy.first - m_delta*diverge_x ;
+      tmp_xy.second = tmp_xy.second - m_delta*diverge_y ;
 
       x_plot.push_back( tmp_xy.first ) ;
       y_plot.push_back( tmp_xy.second ) ;
 
+      ++count ;
+      std::cout << "count: " << count << " " ;
       std::cout << tmp_xy.first << " " << tmp_xy.second << std::endl ;
     }
 
@@ -75,7 +86,7 @@ int main() {
   const auto least_z = matplot::transform( least_x, least_y, func ) ;
   matplot::scatter3( least_x, least_y, least_z ) ;
 
-  Newton2D newton2d( DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ), 0.01 ) ;
+  Newton2D newton2d( DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ), 0.1 ) ;
   const auto [solution_x, solution_y] = newton2d.Execute() ;
   const auto solution_z = matplot::transform( solution_x, solution_y, func ) ;
   matplot::scatter3( solution_x, solution_y, solution_z ) ;
