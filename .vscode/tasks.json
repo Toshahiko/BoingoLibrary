@@ -12,7 +12,7 @@
 				"${workspaceFolder}/BoingoNumerical/private/src/*.cpp",
 				"${workspaceFolder}/BoingoVisualization/private/src/*.cpp",
 				"${workspaceFolder}/BoingoApi/private/src/*.cpp",
-				"${workspaceFolder}/main/main.cpp",
+				"${workspaceFolder}/main/*.cpp",
 				"-std=c++2a",
 				"-I${workspaceFolder}",
 				"-L/usr/local/Cellar/matplotplusplus/1.1.0/lib/",

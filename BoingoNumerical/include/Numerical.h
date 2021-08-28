@@ -1,5 +1,4 @@
 #pragma once
-#include <matplot/matplot.h>
 
 namespace Boingo::Numerical {
 

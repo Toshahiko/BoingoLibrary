@@ -1,6 +1,6 @@
 #include <iostream>
 #include <memory>
-#include "SettingManager.h"
+#include "BoingoVisualization/include/SettingManager.h"
 #include <tuple>
 
 namespace Boingo::App {

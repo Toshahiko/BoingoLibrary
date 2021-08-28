@@ -1,5 +1,5 @@
 #include <include/pch.h>
-#include "HelloFunc.h"
+#include "BoingoApi/include/HelloFunc.h"
 
 namespace Boingo {
 
