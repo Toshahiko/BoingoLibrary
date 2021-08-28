@@ -84,7 +84,8 @@
     "thread": "cpp",
     "typeindex": "cpp",
     "valarray": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "__bit_reference": "cpp"
   },
   "C_Cpp.clang_format_style":
     "{ AccessModifierOffset: -2, AlignAfterOpenBracket: true, AlignConsecutiveAssignments: true, AlignTrailingComments: true, AlwaysBreakTemplateDeclarations: true, BinPackArguments: false, BinPackParameters: false, BasedOnStyle: LLVM, BreakBeforeBraces: Attach, BreakConstructorInitializersBeforeComma: true, ColumnLimit: 100, ConstructorInitializerAllOnOneLineOrOnePerLine: true, NamespaceIndentation: Inner, PointerAlignment: Left, SpaceBeforeParens: Never, IndentWidth: 2, SpacesBeforeTrailingComments: 1, Cpp11BracedListStyle: false, PointerAlignment: Left, SpacesInParentheses: true, AllowAllConstructorInitializersOnNextLine: false,  FixNamespaceComments: true, SpaceAfterCStyleCast: true, SpaceAfterTemplateKeyword: false, SpaceBeforeAssignmentOperators: true, SpaceBeforeCpp11BracedList: true, SpaceBeforeCtorInitializerColon: true, SpaceBeforeInheritanceColon: true, SpacesInConditionalStatement: true, SpacesInAngles: false, SpaceBeforeParens: ControlStatements, UseTab: Never }",
