@@ -10,9 +10,10 @@ struct Range {
 class Plotter3D {
 public:
   Plotter3D(
-      const Range& rangeX,
-      const Range& rangeY,
-            std::string_view plotType
+      std::vector<std::vector<double>>&& x,
+      std::vector<std::vector<double>>&& y,
+      std::vector<std::vector<double>>&& z,
+      std::string_view plotType
     ) ;
 
   ~Plotter3D() ;

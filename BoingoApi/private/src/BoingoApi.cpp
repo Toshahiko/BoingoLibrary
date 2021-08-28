@@ -1,6 +1,8 @@
+#include <include/pch.h>
 #include <BoingoApi/include/BoingoApi.h>
 #include <BoingoNumerical/include/GradientDescent.h>
 #include <BoingoNumerical/include/Newton2D.h>
+#include <BoingoVisualization/include/Plotter.h>
 
 namespace Boingo::Api {
 
@@ -21,18 +23,20 @@ const auto DivergeFuncY( double x, double y ) {
 }
 
 void StartApi() {
-  const auto [x, y] = matplot::meshgrid( matplot::linspace( -5.0, 5.0 ), matplot::linspace( -5.0, 5.0 ) ) ;
-  const auto z = matplot::transform( x, y, func ) ;
-  matplot::mesh( x, y, z ) ;
-  matplot::hold( matplot::on ) ;
+  auto [x, y] = matplot::meshgrid( matplot::linspace( -5.0, 5.0 ), matplot::linspace( -5.0, 5.0 ) ) ;
+  auto z = matplot::transform( x, y, func ) ;
 
-  const matplot::vector_1d least_x = {2, 4, 0} ;
-  const matplot::vector_1d least_y = {-1, -4, 0} ;
-  const auto least_z = matplot::transform( least_x, least_y, func ) ;
-  matplot::scatter3( least_x, least_y, least_z ) ;
+  Visualization::Plotter3D plotter3D( std::move( x ), std::move( y ), std::move( z ), "mesh" ) ;
+  plotter3D.Execute() ;
+  // matplot::hold( matplot::on ) ;
 
-  Boingo::Numerical::Newton2D newton( DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ) ) ;
-  Boingo::Numerical::GradientDescent gradientDescent( func, DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ), 0.1 ) ;
+  // const matplot::vector_1d least_x = {2, 4, 0} ;
+  // const matplot::vector_1d least_y = {-1, -4, 0} ;
+  // const auto least_z = matplot::transform( least_x, least_y, func ) ;
+  // matplot::scatter3( least_x, least_y, least_z ) ;
+
+  // Boingo::Numerical::Newton2D newton( DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ) ) ;
+  // Boingo::Numerical::GradientDescent gradientDescent( func, DivergeFuncX, DivergeFuncY, std::make_pair( 0.2, 0.2 ), 0.1 ) ;
   // const auto [solution_x, solution_y] = gradientDescent.Execute() ;
   // const auto solution_z = matplot::transform( solution_x, solution_y, func ) ;
   // matplot::scatter3( solution_x, solution_y, solution_z ) ;
