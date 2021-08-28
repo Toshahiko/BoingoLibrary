@@ -8,5 +8,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <list>
+#include <string_view>
 
 #include "smartmemory.h"

@@ -1,6 +1,6 @@
-#include <Boingo/include/Newton2D.h>
+#include <BoingoNumerical/include/Newton2D.h>
 
-namespace Boingo {
+namespace Boingo::Numerical {
 
 Newton2D::Newton2D(
     const Function2D& diverge_x,

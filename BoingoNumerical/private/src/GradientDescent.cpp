@@ -1,7 +1,7 @@
-#include <Boingo/include/GradientDescent.h>
+#include <BoingoNumerical/include/GradientDescent.h>
 #include <matplot/matplot.h>
 
-namespace Boingo {
+namespace Boingo::Numerical {
 
 namespace {
 }

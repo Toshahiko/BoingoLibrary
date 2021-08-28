@@ -2,7 +2,7 @@
 #include <matplot/matplot.h>
 #include "Numerical.h"
 
-namespace Boingo {
+namespace Boingo::Numerical {
 
 class Newton2D {
 public:

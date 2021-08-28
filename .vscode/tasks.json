@@ -9,7 +9,9 @@
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-g",
-				"${workspaceFolder}/Boingo/private/src/*.cpp",
+				"${workspaceFolder}/BoingoNumerical/private/src/*.cpp",
+				"${workspaceFolder}/BoingoVisualization/private/src/*.cpp",
+				"${workspaceFolder}/BoingoApi/private/src/*.cpp",
 				"${workspaceFolder}/main/main.cpp",
 				"-std=c++2a",
 				"-I${workspaceFolder}",
@@ -37,7 +39,9 @@
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-g",
-				"${workspaceFolder}/Boingo/private/src/*.cpp",
+				"${workspaceFolder}/BoingoNumerical/private/src/*.cpp",
+				"${workspaceFolder}/BoingoVisualization/private/src/*.cpp",
+				"${workspaceFolder}/BoingoApi/private/src/*.cpp",
 				"${workspaceFolder}/test/*.cpp",
 				"-std=c++2a",
 				"-I/Users/tanimotokazuhiko/Projects/doctest/doctest",
