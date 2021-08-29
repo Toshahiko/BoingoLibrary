@@ -26,7 +26,9 @@ void StartApi() {
   auto [x, y] = matplot::meshgrid( matplot::linspace( -5.0, 5.0 ), matplot::linspace( -5.0, 5.0 ) ) ;
   auto z = matplot::transform( x, y, func ) ;
 
-  Visualization::Plotter3D plotter3D( std::move( x ), std::move( y ), std::move( z ), "mesh" ) ;
+  Visualization::Plotter3D plotter3D( std::move( x ), std::move( y ), std::move( z ), "surf" ) ;
+
+  plotter3D.SetRangeX( { 0.0, 1.0 } ) ;
   plotter3D.Execute() ;
   // matplot::hold( matplot::on ) ;
 

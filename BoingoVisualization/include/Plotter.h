@@ -18,6 +18,16 @@ public:
 
   ~Plotter3D() ;
   void Execute() const ;
+  void SetRangeX( const Range& rangeX ) ;
+  void SetRangeY( const Range& rangeY ) ;
+
+private:
+  bool HasRangeX() const ;
+  bool HasRangeY() const ;
+  Range RangeX() const ;
+  Range RangeY() const ;
+  void Initialize() const ;
+  void Plot() const ;
 
 private:
   struct Impl ;

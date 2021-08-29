@@ -14,7 +14,7 @@ struct Plotter3D::Impl {
   : m_x( std::move( x ) )
   , m_y( std::move( y ) )
   , m_z( std::move( z ) )
-  , m_plotType(plotType)
+  , m_plotType( plotType )
   {}
   matplot::vector_2d m_x ;
   matplot::vector_2d m_y ;
@@ -34,24 +34,60 @@ Plotter3D::Plotter3D(
     , std::move( y )
     , std::move( z )
     , plotType ) )
-{
-
-}
+{}
 
 Plotter3D::~Plotter3D() = default ;
 
 void Plotter3D::Execute() const {
-  if ( m_pImpl->m_rangeX ) {
-    matplot::xlim( { m_pImpl->m_rangeX.value().lower, m_pImpl->m_rangeX.value().upper } );
-  }
-  if ( m_pImpl->m_rangeY ) {
-    matplot::ylim( { m_pImpl->m_rangeY.value().lower, m_pImpl->m_rangeY.value().upper } );
-  }
+  Initialize() ;
+  Plot() ;
+}
 
+bool Plotter3D::HasRangeX() const {
+  return m_pImpl->m_rangeX.has_value() ;
+}
+
+bool Plotter3D::HasRangeY() const {
+  return m_pImpl->m_rangeY.has_value() ;
+}
+
+Range Plotter3D::RangeX() const {
+  assert( HasRangeX() );
+  return m_pImpl->m_rangeX.value() ;
+}
+
+Range Plotter3D::RangeY() const {
+  assert( HasRangeY() );
+  return m_pImpl->m_rangeY.value() ;
+}
+
+void Plotter3D::SetRangeX( const Range& rangeX ) {
+  m_pImpl->m_rangeX = rangeX ;
+}
+
+void Plotter3D::SetRangeY( const Range& rangeY ) {
+  m_pImpl->m_rangeY = rangeY ;
+}
+
+void Plotter3D::Initialize() const {
+    if ( HasRangeX() ) {
+    matplot::xlim( { RangeX().lower, RangeX().upper } );
+  }
+  if ( HasRangeY() ) {
+    matplot::ylim( { RangeY().lower, RangeY().upper } );
+  }
+}
+
+void Plotter3D::Plot() const {
   if ( m_pImpl->m_plotType == "mesh" ) {
     matplot::mesh( m_pImpl->m_x, m_pImpl->m_y, m_pImpl->m_z );
     matplot::show() ;
-    std::cout << "ploted" << std::endl ;
+    return ;
+  }
+
+  if ( m_pImpl->m_plotType == "surf" ) {
+    matplot::surf( m_pImpl->m_x, m_pImpl->m_y, m_pImpl->m_z );
+    matplot::show() ;
     return ;
   }
 
