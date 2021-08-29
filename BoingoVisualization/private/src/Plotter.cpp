@@ -21,6 +21,7 @@ struct Plotter3D::Impl {
   matplot::vector_2d m_z ;
   std::optional<Range> m_rangeX ;
   std::optional<Range> m_rangeY ;
+  std::optional<Range> m_rangeZ ;
   std::string_view m_plotType ;
 } ;
 
@@ -51,6 +52,10 @@ bool Plotter3D::HasRangeY() const {
   return m_pImpl->m_rangeY.has_value() ;
 }
 
+bool Plotter3D::HasRangeZ() const {
+  return m_pImpl->m_rangeZ.has_value() ;
+}
+
 Range Plotter3D::RangeX() const {
   assert( HasRangeX() );
   return m_pImpl->m_rangeX.value() ;
@@ -61,6 +66,11 @@ Range Plotter3D::RangeY() const {
   return m_pImpl->m_rangeY.value() ;
 }
 
+Range Plotter3D::RangeZ() const {
+  assert( HasRangeZ() );
+  return m_pImpl->m_rangeZ.value() ;
+}
+
 void Plotter3D::SetRangeX( const Range& rangeX ) {
   m_pImpl->m_rangeX = rangeX ;
 }
@@ -69,12 +79,19 @@ void Plotter3D::SetRangeY( const Range& rangeY ) {
   m_pImpl->m_rangeY = rangeY ;
 }
 
+void Plotter3D::SetRangeZ( const Range& rangeZ ) {
+  m_pImpl->m_rangeZ = rangeZ ;
+}
+
 void Plotter3D::Initialize() const {
-    if ( HasRangeX() ) {
+  if ( HasRangeX() ) {
     matplot::xlim( { RangeX().lower, RangeX().upper } );
   }
   if ( HasRangeY() ) {
     matplot::ylim( { RangeY().lower, RangeY().upper } );
+  }
+  if ( HasRangeZ() ) {
+    matplot::ylim( { RangeZ().lower, RangeZ().upper } );
   }
 }
 

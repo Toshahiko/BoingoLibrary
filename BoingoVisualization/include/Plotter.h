@@ -20,12 +20,15 @@ public:
   void Execute() const ;
   void SetRangeX( const Range& rangeX ) ;
   void SetRangeY( const Range& rangeY ) ;
+  void SetRangeZ( const Range& rangeZ ) ;
 
 private:
   bool HasRangeX() const ;
   bool HasRangeY() const ;
+  bool HasRangeZ() const ;
   Range RangeX() const ;
   Range RangeY() const ;
+  Range RangeZ() const ;
   void Initialize() const ;
   void Plot() const ;
 
