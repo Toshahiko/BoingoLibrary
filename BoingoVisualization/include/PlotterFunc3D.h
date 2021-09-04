@@ -4,16 +4,21 @@
 
 namespace Boingo::Visualization {
 
-class Plotter3D final : public IRangePlot {
+class PlotterFunc3D final : public IRangePlot {
 public:
-  Plotter3D(
-      std::vector<std::vector<double>>&& x,
-      std::vector<std::vector<double>>&& y,
-      std::vector<std::vector<double>>&& z,
+  PlotterFunc3D(
+      const std::function<double( double, double )>& funcx,
+      const std::function<double( double, double )>& funcy,
+      const std::function<double( double, double )>& funcz,
       std::string_view plotType
     ) ;
 
-  ~Plotter3D() ;
+  PlotterFunc3D(
+      const std::function<double( double, double )>& func,
+      std::string_view plotType
+    ) ;
+
+  ~PlotterFunc3D() ;
   void Execute() const ;
   void SetRangeX( const Range& rangeX ) final ;
   void SetRangeY( const Range& rangeY ) final ;
@@ -31,8 +36,7 @@ private:
 
 private:
   struct Impl ;
-  SMART_PTR_IMPL( Impl )
+  SMART_PTR_IMPL( Impl ) ;
   Impl_up m_pImpl ;
 } ;
-
 }

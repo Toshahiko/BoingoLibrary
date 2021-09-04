@@ -3,6 +3,7 @@
 #include <BoingoNumerical/include/GradientDescent.h>
 #include <BoingoNumerical/include/Newton2D.h>
 #include <BoingoVisualization/include/Plotter.h>
+#include <BoingoVisualization/include/PlotterFunc3D.h>
 
 namespace Boingo::Api {
 
@@ -23,14 +24,23 @@ const auto DivergeFuncY( double x, double y ) {
 }
 
 void StartApi() {
-  auto [x, y] = matplot::meshgrid( matplot::linspace( -5.0, 5.0 ), matplot::linspace( -5.0, 5.0 ) ) ;
-  auto z = matplot::transform( x, y, func ) ;
+  // auto [x, y] = matplot::meshgrid( matplot::linspace( -5.0, 5.0 ), matplot::linspace( -5.0, 5.0 ) ) ;
+  // auto z = matplot::transform( x, y, func ) ;
 
-  Visualization::Plotter3D plotter3D( std::move( x ), std::move( y ), std::move( z ), "surf" ) ;
+  // Visualization::Plotter3D plotter3D( std::move( x ), std::move( y ), std::move( z ), "surf" ) ;
 
-  plotter3D.SetRangeX( { 0.0, 1.0 } ) ;
-  plotter3D.Execute() ;
+  // plotter3D.SetRangeX( { 0.0, 1.0 } ) ;
+  // plotter3D.Execute() ;
   // matplot::hold( matplot::on ) ;
+
+  // matplot::fmesh( []( double x, double y ) { return x*y ; } ) ;
+
+  auto r = [](double u, double v) { return 2 + sin(7 * u + 5 * v); };
+  auto funx = [r](double u, double v) { return r(u, v) * cos(u) * sin(v); };
+  auto funy = [r](double u, double v) { return r(u, v) * sin(u) * sin(v); };
+  auto funz = [r](double u, double v) { return r(u, v) * cos(v); };
+  Visualization::PlotterFunc3D plotterFunc3D( funx, funy, funz, "mesh" ) ;
+  plotterFunc3D.Execute() ;
 
   // const matplot::vector_1d least_x = {2, 4, 0} ;
   // const matplot::vector_1d least_y = {-1, -4, 0} ;
