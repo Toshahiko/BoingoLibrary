@@ -42,13 +42,12 @@ void PlotScatter3D() {
 
 std::random_device seed ;
 std::mt19937_64 engine( seed() ) ;
+constexpr int NUMBER = 10000 ;
 
 std::vector<double> NormalDistribution() {
-  constexpr double mu = 1.0 ;
-  constexpr double sigma = 1.0 ;
   std::normal_distribution<double> dist( 0.0, 1.0 ) ;
   std::vector<double> result ;
-  for ( int i = 0 ; i < 1000000 ; ++i ) {
+  for ( int i = 0 ; i < NUMBER ; ++i ) {
     result.emplace_back( dist( engine ) ) ;
   }
 
@@ -63,27 +62,52 @@ void ShowHistogram() {
   matplot::show();
 }
 
+inline double drift(double x, double t, double mu)
+{
+    return x*mu;
+}
+
+inline double diffusion(double x, double t, double sigma)
+{
+    return x*sigma;
+}
+
+constexpr double mu = 1.0 ;
+const double sigma = sqrt( 2.0 ) ;
+
 }
 
 void StartApi() {
-  constexpr int number = 10000 ;
-  constexpr double max = 1.0 ;
-  constexpr double dt = max/number ;
-  std::vector<double> x = matplot::linspace( 0, max, number ) ;
 
+  constexpr double max = 10.0 ;
+  constexpr double dt = max/NUMBER ;
+  std::vector<double> x = matplot::linspace( 0, max, NUMBER ) ;
+
+  const auto randoms = NormalDistribution() ;
   double W = 0.0 ;
-  const auto AnalyticsSolution = [dt, &W] ( double time ) {
-    constexpr double mu = 1.0 ;
-    constexpr double sigma = 1.0 ;
-    std::normal_distribution<double> dist( 0.0, 1.0 ) ;
-    W += dist( engine )*std::sqrt( dt ) ;
+  int count = 0 ;
+  const auto AnalyticsSolution = [dt, &randoms, &W, &count] ( double time ) {
+    W += randoms[count]*std::sqrt( dt ) ;
+    ++count ;
     return std::exp( mu - std::pow( sigma, 2 )/2.0 + sigma*W ) ;
   } ;
 
-  std::vector<double> y = matplot::transform( x, AnalyticsSolution ) ;
+  std::vector<double> analyticalY = matplot::transform( x, AnalyticsSolution ) ;
+  matplot::plot( x, analyticalY, "-o" ) ;
+  matplot::hold( matplot::on ) ;
 
-  matplot::plot( x, y, "-o" ) ;
-  matplot::show() ; 
+  int aprroCount = 0 ;
+  double diff = 1.0 ;
+  const auto ApproximateSolution = [dt, &randoms, &W, &aprroCount, &diff] ( double time ) {
+    diff += drift( diff, time, mu )*dt + diffusion( diff, time, sigma )*std::sqrt( dt )*randoms[aprroCount] ;
+    ++aprroCount ;
+    return diff ;
+  } ;
+
+  std::vector<double> approY = matplot::transform( x, ApproximateSolution ) ;
+  matplot::plot( x, approY, "-xr" ) ;
+
+  matplot::show() ;
 }
 
 }
