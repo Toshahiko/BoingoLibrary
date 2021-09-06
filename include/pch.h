@@ -9,5 +9,7 @@
 #include <unordered_set>
 #include <list>
 #include <string_view>
+#include <cmath>
+#include <random>
 
 #include "smartmemory.h"
