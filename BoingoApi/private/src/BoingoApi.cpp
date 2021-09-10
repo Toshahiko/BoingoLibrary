@@ -166,23 +166,13 @@ std::vector<std::vector<int>> GenerateSteps( const size_t step_size ) {
   return results ;
 }
 
-
-void ShowSteps( const std::vector<std::vector<int>>& steps ) {
-  for ( const auto& step : steps ) {
-    std::for_each( step.cbegin(), step.cend(),
-      []( const int value ) { std::cout << value ; } ) ;
-
-    std::cout << std::endl ;
-  }
-
-}
-
-void StartApi() {
-  std::vector<int> costs{ 2, 3, 6, 3, 7, 7, 8 } ;
-  const auto results = GenerateSteps( costs.size() ) ;
+std::vector<int> CalculateScores(
+  const std::vector<std::vector<int>>& steps,
+  const std::vector<int>&              costs
+  ) {
   std::vector<int> scores ;
-  scores.reserve( results.size() ) ;
-  for ( const auto& path : results ) {
+  scores.reserve( steps.size() ) ;
+  for ( const auto& path : steps ) {
     int cost = 0 ;
     int length = 0 ;
     for ( int i = 0 ; i < path.size() - 1 ; ++i ) {
@@ -195,6 +185,22 @@ void StartApi() {
     }
     scores.push_back( cost ) ;
   }
+  return scores ;
+}
+
+void ShowSteps( const std::vector<std::vector<int>>& steps ) {
+  for ( const auto& step : steps ) {
+    std::for_each( step.cbegin(), step.cend(),
+      []( const int value ) { std::cout << value ; } ) ;
+
+    std::cout << std::endl ;
+  }
+}
+
+void StartApi() {
+  std::vector<int> costs{ 2, 3, 6, 3, 7, 7, 8 } ;
+  const auto results = GenerateSteps( costs.size() ) ;
+  const auto scores = CalculateScores( results, costs ) ;
 
   for ( const auto score : scores ) {
     std::cout << "score: " << score << std::endl ;
