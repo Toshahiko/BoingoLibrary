@@ -77,37 +77,129 @@ const double sigma = sqrt( 2.0 ) ;
 
 }
 
+namespace Algorithms {
+
+void InsertionSortAscendent( std::vector<int>& vec ) {
+  for ( int j = 1 ; j < vec.size() ; ++j ) {
+    int key = vec[j] ;
+    int i = j - 1 ;
+    while( i >= 0 && vec[i] > key ) {
+      vec[i+1] = vec[i] ;
+      --i ;
+    }
+    vec[i+1] = key ;
+  }
+}
+
+void InsertionSortDescendent( std::vector<int>& vec ) {
+  for ( int j = 1 ; j < vec.size() ; ++j ) {
+    int key = vec[j] ;
+    int i = j - 1 ;
+    while( i >= 0 && vec[i] < key ) {
+      vec[i+1] = vec[i] ;
+      --i ;
+    }
+    vec[i+1] = key ;
+  }
+}
+
+}
+
+int CostOneStep( const std::vector<int>& vec, int i ) {
+  return abs( vec[i] - vec[i + 1] ) ;
+}
+
+int CostTwoStep( const std::vector<int>& vec, int i ) {
+  return abs( vec[i] - vec[i + 2] ) ;
+}
+
+void DP( const std::vector<int>& vec ) {
+  int cost = 0 ;
+  for ( size_t i = 0 ; i < vec.size() ; ++i ) {
+    cost += CostOneStep( vec, i ) ;
+  }
+
+  // 全てのパターンを攻略する
+  // ステップの合計がサイズ分である必要がある。
+  // 方法1:1,2を使って1ステップ2ステップを決めるvectorを作成する。
+  // 方法2:bitを使ってどこで二段飛ばしにするかを表現する。
+  int newcost = 0 ;
+  newcost = cost - CostOneStep( vec, vec.size() - 1 ) - CostOneStep( vec, vec.size() - 2 ) ;
+
+  newcost += CostTwoStep( vec, vec.size() - 2 ) ;
+
+}
+
+std::vector<int> GenerateNext( const std::vector<int>& vec ) {
+  // 2を探して、その前の二つの1を削除する。
+  std::vector<int> nextVec{ vec.cbegin(), vec.cend() } ;
+  const auto pos2 = std::find( nextVec.cbegin(), nextVec.cend(), 2 ) ;
+  if ( std::distance( nextVec.cbegin(), pos2 ) <= 1 ) return std::vector<int>() ;
+
+  nextVec.erase( pos2 - 2, pos2 ) ;
+  // 2をpush_backする。
+  nextVec.push_back( 2 ) ;
+
+  return nextVec ;
+}
+
+std::vector<std::vector<int>> GenerateOriginalSteps( const size_t step_size ) {
+  std::vector<int> vec( step_size, 1 ) ;
+  std::vector<std::vector<int>> results{ vec } ;
+  while ( true ) {
+    vec = GenerateNext( vec );
+    if ( vec.empty() ) break ;
+    results.push_back( vec ) ;
+  }
+
+  return results ;
+}
+
+std::vector<std::vector<int>> GenerateSteps( const size_t step_size ) {
+  auto steps = GenerateOriginalSteps( step_size ) ;
+  std::vector<std::vector<int>> results ;
+  for ( auto& step : steps ) {
+    do {
+      results.push_back( step ) ;
+    } while ( std::next_permutation( step.begin(), step.end() ) );
+  }
+  return results ;
+}
+
+
+void ShowSteps( const std::vector<std::vector<int>>& steps ) {
+  for ( const auto& step : steps ) {
+    std::for_each( step.cbegin(), step.cend(),
+      []( const int value ) { std::cout << value ; } ) ;
+
+    std::cout << std::endl ;
+  }
+
+}
+
 void StartApi() {
+  std::vector<int> costs{ 2, 3, 6, 3, 7, 7, 8 } ;
+  const auto results = GenerateSteps( costs.size() ) ;
+  std::vector<int> scores ;
+  scores.reserve( results.size() ) ;
+  for ( const auto& path : results ) {
+    int cost = 0 ;
+    int length = 0 ;
+    for ( int i = 0 ; i < path.size() - 1 ; ++i ) {
+      if ( path[i] == 1 ) {
+        cost += CostOneStep( costs, length );
+      } else if ( path[i] == 2 ) {
+        cost += CostTwoStep( costs, length );
+      }
+      length += path[i] ;
+    }
+    scores.push_back( cost ) ;
+  }
 
-  constexpr double max = 10.0 ;
-  constexpr double dt = max/NUMBER ;
-  std::vector<double> x = matplot::linspace( 0, max, NUMBER ) ;
+  for ( const auto score : scores ) {
+    std::cout << "score: " << score << std::endl ;
+  }
 
-  const auto randoms = NormalDistribution() ;
-  double W = 0.0 ;
-  int count = 0 ;
-  const auto AnalyticsSolution = [dt, &randoms, &W, &count] ( double time ) {
-    W += randoms[count]*std::sqrt( dt ) ;
-    ++count ;
-    return std::exp( mu - std::pow( sigma, 2 )/2.0 + sigma*W ) ;
-  } ;
-
-  std::vector<double> analyticalY = matplot::transform( x, AnalyticsSolution ) ;
-  matplot::plot( x, analyticalY, "-o" ) ;
-  matplot::hold( matplot::on ) ;
-
-  int aprroCount = 0 ;
-  double diff = 1.0 ;
-  const auto ApproximateSolution = [dt, &randoms, &W, &aprroCount, &diff] ( double time ) {
-    diff += drift( diff, time, mu )*dt + diffusion( diff, time, sigma )*std::sqrt( dt )*randoms[aprroCount] ;
-    ++aprroCount ;
-    return diff ;
-  } ;
-
-  std::vector<double> approY = matplot::transform( x, ApproximateSolution ) ;
-  matplot::plot( x, approY, "-xr" ) ;
-
-  matplot::show() ;
 }
 
 }
